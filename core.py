@@ -42,7 +42,7 @@ def printMemory():
     print("\n")
 
 
-def memory(key, value=None):
+def memory(key: object, value: object = None) -> object:
     global memoryStorage
     if " " in key:
         sys.stderr.write("ERREUR : Espace interdit dans les noms de variable : " + key + "\n")

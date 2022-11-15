@@ -5,7 +5,7 @@ import core
 
 def setup():
     print("Setup START---------")
-    core.fps = 30
+    core.fps = 1
     core.WINDOW_SIZE = [800, 600]
 
 
@@ -43,7 +43,7 @@ def drawBob():
     p3.y = -p3.y
     p3 = p3 + core.memory("origine")
 
-    core.Draw.polygon((255, 0, 0), ((p1), (p2), (p3)))
+    core.Draw.polygon((255, 0, 0), (p1, p2, p3))
 
 def moveBob():
     core.memory("bobHistorique").append(Vector2(core.memory("bobPosition").x,-core.memory("bobPosition").y)+ core.memory("origine"))

@@ -10,7 +10,7 @@ def setup():
     core.memory("j2", Player("J2", 580, 200))
 
     core.memory("balle", Balle())
-
+    core.printMemory()
 
 def edge(j):
     if j.position.y<0:
