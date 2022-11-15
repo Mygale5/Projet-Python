@@ -23,3 +23,12 @@ class Player:
 
     def right(self):
         self.position.z = self.position.z + 10
+
+class Projectile:
+    def __init__(self,k="K0", px=0, py=0, pz=0, avx=0, avy=0):
+        self.name = k
+        self.pos = Vector3(px, py, pz)
+        self.vit = Vector2(avx, avy)
+
+    def shoot(self):
+        self.vit.xy = (int(100 * cos(radians(self.pos.z))))/80, (-int(100 * sin(radians(self.pos.z))))/80
