@@ -119,11 +119,11 @@ from pygame.time import *
 def setup():
     core.fps = 30
     core.WINDOW_SIZE = [720, 720]
-    core.memory('astePos', Player("J0", 360, 360, 0))
+    core.memory('astePos', Player())
     core.memory("bobHistorique", [])
     # core.memory('origine', Vector2(250, 250))
     core.memory("incremental", Vector3(0, 0, 0))
-    core.memory("projo", Projectile("K0", 360, 360))
+    core.memory("projo", Projectile(Player()))
     core.memory("p2", Vector2(0, 0))
     core.memory("test", Vector2(0, 0))
     core.memory("Vit", Vector2(0, 0))
