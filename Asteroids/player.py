@@ -27,6 +27,6 @@ class Player:
     def right(self):
         self.position.z = self.position.z + 10
 
-    def lauch(self):
+    def launch(self):
         self.all_projectiles.add(Projectile(self))
 

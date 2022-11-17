@@ -114,11 +114,15 @@ from pygame.math import *
 from random import *
 from player import *
 from pygame.time import *
+from pygame.locals import *
 
 
 def setup():
     core.fps = 30
-    core.WINDOW_SIZE = [720, 720]
+    WINDOWHEIGHT = 720
+    WINDOWWIDTH = 720
+    windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT), 0, 32)
+    pygame.display.set_caption("test")
     core.memory('astePos', Player())
     core.memory("bobHistorique", [])
     # core.memory('origine', Vector2(250, 250))
@@ -129,17 +133,20 @@ def setup():
     core.memory("Vit", Vector2(0, 0))
     core.memory("incre", Vector2(0, 0))
 
+
 def run():
     clock()
     touches()
     move()
     show()
-    projectile()
+    shoot()
+    #projectile()
     resetpos()
+
+    core.memory("astePos").all_projectiles
 
 
 def clock():
-
     horlo = Clock()
 
     horlo.tick(30)
@@ -148,8 +155,8 @@ def clock():
         core.memory("incremental").x = 0
     core.memory("incremental").x += horlo.get_time()
 
-def show():
 
+def show():
     core.cleanScreen()
     p1 = Vector2(core.memory("astePos").position.x, core.memory("astePos").position.y) + Vector2(-5, 0).rotate(
         -90 - core.memory("astePos").position.z)
@@ -162,8 +169,6 @@ def show():
 
     core.Draw.polygon([255, 0, 0], (p1, p2, p3))
     core.memory("p2", p2)
-
-
 
 
 def move():
@@ -187,6 +192,7 @@ def move():
             if core.memory("astePos").vitesse.y > 0:
                 core.memory("astePos").vitesse.y = 0
 
+
 '''
 def shoot():
     core.memory("projo").shoot()
@@ -203,7 +209,7 @@ def shoot():
         core.memory("test").x = 0
     core.memory("projo").pos.xy += core.memory("projo").vit.xy + core.memory("Vit")
     core.Draw.circle((0, 255, 0), (core.memory("projo").pos.x, core.memory("projo").pos.y), 2.5)
-'''
+
 def projectile():
     core.memory("projo").shoot()
 
@@ -229,6 +235,11 @@ def projectile():
         core.memory("projo").proj4()
     if core.memory("incre").x == 5:
         core.memory("projo").proj5()
+'''
+
+def shoot():
+    if core.getKeyPressList("e"):
+        core.memory("astePos").launch()
 
 
 def resetpos():
@@ -240,6 +251,9 @@ def resetpos():
         core.memory("astePos").position.y = 0
     elif core.memory("astePos").position.y < 0:
         core.memory("astePos").position.y = 720
+
+
+'''
     if core.memory("projo").pos.x > 720:
         core.memory("projo").pos.x = 0
     elif core.memory("projo").pos.x < 0:
@@ -248,6 +262,9 @@ def resetpos():
         core.memory("projo").pos.y = 0
     elif core.memory("projo").pos.y < 0:
         core.memory("projo").pos.y = 720
+'''
+
+
 def touches():
     core.memory("astePos").accel.xy = 0, 0
     if core.getKeyPressList("z"):
@@ -258,7 +275,6 @@ def touches():
         core.memory("astePos").down()
     if core.getKeyPressList("q"):
         core.memory("astePos").right()
-
 
 
 core.main(setup, run)
