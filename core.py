@@ -347,7 +347,7 @@ class Texture:
         self.sprit = pygame.image.load(self.url).convert_alpha()
         self.sprit = pygame.transform.scale(self.sprit, self.scaleSize)
         self.w = self.sprit.get_width()
-        self.h = self.sprit.get_width()
+        self.h = self.sprit.get_height()
         self.ready = True
 
     def show(self):

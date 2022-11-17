@@ -9,11 +9,10 @@ from projectile import Projectile
 
 class Player:
     def __init__(self):
-        super().__init__()
         self.position = Vector3(360, 360, 0)
         self.accel = Vector2(0, 0)
         self.vitesse = Vector2(0, 0)
-        self.all_projectiles = pygame.sprite.Group()
+
 
     def up(self):
         self.accel.xy = (int(100 * cos(radians(self.position.z))))/80, (-int(100 * sin(radians(self.position.z))))/80
@@ -27,6 +26,5 @@ class Player:
     def right(self):
         self.position.z = self.position.z + 10
 
-    def launch(self):
-        self.all_projectiles.add(Projectile(self))
+
 

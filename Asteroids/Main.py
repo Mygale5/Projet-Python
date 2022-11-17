@@ -112,38 +112,36 @@ import core
 from math import *
 from pygame.math import *
 from random import *
-from player import *
+from player import Player
 from pygame.time import *
 from pygame.locals import *
-
+from core import Texture
+from projectile import Projectile
 
 def setup():
     core.fps = 30
-    WINDOWHEIGHT = 720
-    WINDOWWIDTH = 720
-    windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT), 0, 32)
-    pygame.display.set_caption("test")
-    core.memory('astePos', Player())
+    core.WINDOW_SIZE=[720, 720]
     core.memory("bobHistorique", [])
     # core.memory('origine', Vector2(250, 250))
     core.memory("incremental", Vector3(0, 0, 0))
-    core.memory("projo", Projectile(Player()))
+    #core.memory("projo", Projectile())
     core.memory("p2", Vector2(0, 0))
-    core.memory("test", Vector2(0, 0))
     core.memory("Vit", Vector2(0, 0))
-    core.memory("incre", Vector2(0, 0))
-
+    core.memory("bool", [False, False, False])
+    #[0] = exe 1 fois projo
+    core.memory('astePos', Player())
 
 def run():
+    if core.memory("bool")[0] == False :
+        core.memory("projo", Projectile())
+        core.memory("bool")[0] = True
     clock()
     touches()
     move()
     show()
-    shoot()
     #projectile()
     resetpos()
 
-    core.memory("astePos").all_projectiles
 
 
 def clock():
@@ -237,9 +235,6 @@ def projectile():
         core.memory("projo").proj5()
 '''
 
-def shoot():
-    if core.getKeyPressList("e"):
-        core.memory("astePos").launch()
 
 
 def resetpos():
