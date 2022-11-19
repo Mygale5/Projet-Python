@@ -122,9 +122,7 @@ def setup():
     core.fps = 30
     core.WINDOW_SIZE=[720, 720]
     core.memory("bobHistorique", [])
-    # core.memory('origine', Vector2(250, 250))
     core.memory("incremental", Vector3(0, 0, 0))
-    #core.memory("projo", Projectile())
     core.memory("p2", Vector2(0, 0))
     core.memory("Vit", Vector2(0, 0))
     core.memory("bool", [False, False, False])
@@ -134,12 +132,15 @@ def setup():
 def run():
     if core.memory("bool")[0] == False :
         core.memory("projo", Projectile())
+        core.memory("projo").load()
         core.memory("bool")[0] = True
+
+
     clock()
     touches()
     move()
     show()
-    #projectile()
+    shoot()
     resetpos()
 
 
@@ -191,49 +192,14 @@ def move():
                 core.memory("astePos").vitesse.y = 0
 
 
-'''
+
 def shoot():
-    core.memory("projo").shoot()
-
 
     if core.getKeyPressList("e"):
-        core.memory("Vit").xy = core.memory("astePos").vitesse.xy
-
-        if core.memory("test").x == 0:
-            core.memory("test").x = 1
-            core.memory("projo").pos.xy = core.memory("p2")
-            core.memory("projo").pos.z = core.memory("astePos").position.z
-
-        core.memory("test").x = 0
-    core.memory("projo").pos.xy += core.memory("projo").vit.xy + core.memory("Vit")
-    core.Draw.circle((0, 255, 0), (core.memory("projo").pos.x, core.memory("projo").pos.y), 2.5)
-
-def projectile():
-    core.memory("projo").shoot()
-
-
-    if core.getKeyPressList("e"):
-        core.memory("Vit").xy = core.memory("astePos").vitesse.xy
-        core.memory("incre").x += 1
-        if core.memory("incre").x > 5:
-            core.memory("incre").x = 0
-        if core.memory("test").x == 0:
-            core.memory("test").x = 1
-            core.memory("projo").pos.xy = core.memory("p2")
-            core.memory("projo").pos.z = core.memory("astePos").position.z
-        core.memory("test").x = 0
-    core.memory("projo").pos.xy += core.memory("projo").vit.xy + core.memory("Vit")
-    if core.memory("incre").x >1:
-        core.memory("projo").proj1()
-    if core.memory("incre").x >2:
-        core.memory("projo").proj2()
-    if core.memory("incre").x >3:
-        core.memory("projo").proj3()
-    if core.memory("incre").x >4:
-        core.memory("projo").proj4()
-    if core.memory("incre").x == 5:
-        core.memory("projo").proj5()
-'''
+        core.memory("projo").apllyvit()
+        core.memory("projo").ready = True
+        core.memory("projo").show()
+    print(core.memory("projo").ready)
 
 
 
@@ -246,9 +212,6 @@ def resetpos():
         core.memory("astePos").position.y = 0
     elif core.memory("astePos").position.y < 0:
         core.memory("astePos").position.y = 720
-
-
-'''
     if core.memory("projo").pos.x > 720:
         core.memory("projo").pos.x = 0
     elif core.memory("projo").pos.x < 0:
@@ -257,7 +220,6 @@ def resetpos():
         core.memory("projo").pos.y = 0
     elif core.memory("projo").pos.y < 0:
         core.memory("projo").pos.y = 720
-'''
 
 
 def touches():
