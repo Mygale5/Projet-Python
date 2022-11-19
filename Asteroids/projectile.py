@@ -48,7 +48,39 @@ class Projectile():
         self.h = self.sprit.get_height()
         self.ready = True
 
-    def show(self):
+    def show0(self):
+        if self.display:
+            if self.box:
+                core.Draw.rect((0,255,0),(self.pos.x,self.pos.y,self.w,self.h),1)
+            if self.ready:
+                self.sprit.set_alpha(self.alpha)
+                core.screen.blit(self.sprit, self.pos.xy)
+
+    def show1(self):
+        if self.display:
+            if self.box:
+                core.Draw.rect((0,255,0),(self.pos.x,self.pos.y,self.w,self.h),1)
+            if self.ready:
+                self.sprit.set_alpha(self.alpha)
+                core.screen.blit(self.sprit, self.pos.xy)
+
+    def show2(self):
+        if self.display:
+            if self.box:
+                core.Draw.rect((0,255,0),(self.pos.x,self.pos.y,self.w,self.h),1)
+            if self.ready:
+                self.sprit.set_alpha(self.alpha)
+                core.screen.blit(self.sprit, self.pos.xy)
+
+    def show3(self):
+        if self.display:
+            if self.box:
+                core.Draw.rect((0,255,0),(self.pos.x,self.pos.y,self.w,self.h),1)
+            if self.ready:
+                self.sprit.set_alpha(self.alpha)
+                core.screen.blit(self.sprit, self.pos.xy)
+
+    def show4(self):
         if self.display:
             if self.box:
                 core.Draw.rect((0,255,0),(self.pos.x,self.pos.y,self.w,self.h),1)

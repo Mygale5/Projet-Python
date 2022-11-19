@@ -123,11 +123,12 @@ def setup():
     core.fps = 30
     core.WINDOW_SIZE = [720, 720]
     core.memory("bobHistorique", [])
-    core.memory("incremental", Vector3(0, 0, 0))
+    core.memory("incremental", [0])
+    core.memory("nbprojo", [0, 0, 0, 0, 0])
     core.memory("p2", Vector2(0, 0))
     core.memory("Vit", Vector2(0, 0))
     core.memory("bool", [False, False, False])
-    # [0] = exe 1 fois projo
+    # [0] = exe 1 qfois projo
     core.memory('astePos', Player())
 
 
@@ -149,10 +150,10 @@ def clock():
     horlo = Clock()
 
     horlo.tick(30)
-    if core.memory("incremental").x >= 120:
+    if core.memory("incremental")[0] >= 120:
         core.memory("astePos").vitesse += core.memory("astePos").accel
-        core.memory("incremental").x = 0
-    core.memory("incremental").x += horlo.get_time()
+        core.memory("incremental")[0] = 0
+    core.memory("incremental")[0] += horlo.get_time()
 
 
 def show():
@@ -195,12 +196,39 @@ def move():
 def shoot():
 
     if core.getKeyPressList("e"):
+        core.memory("nbprojo")[0] = 0
+        core.memory("nbprojo")[1] = 0
+        core.memory("nbprojo")[2] = 0
+        core.memory("nbprojo")[3] = 0
+        core.memory("nbprojo")[4] = 0
         core.memory("Vit").xy = core.memory("astePos").vitesse.xy
         core.memory("projo").pos.xy = core.memory("p2").xy
         core.memory("projo").pos.z = core.memory("astePos").position.z
     core.memory("projo").apllyvit()
     core.memory("projo").pos.xy += core.memory("projo").velocity.xy + core.memory("Vit")
-    core.memory("projo").show()
+
+    if core.memory("nbprojo")[0] < 20:
+        core.memory("projo").show0()
+        core.memory("nbprojo")[0] += 1
+
+    elif core.memory("nbprojo")[1] < 20:
+        core.memory("projo").show1()
+        core.memory("nbprojo")[1] += 1
+
+
+"""  
+    elif core.memory("nbprojo")[2] < 20:
+        core.memory("projo").show2()
+        core.memory("nbprojo")[2] += 1
+    
+    elif core.memory("nbprojo")[3] < 20:
+        core.memory("projo").show3()
+        core.memory("nbprojo")[3] += 1
+    
+    elif core.memory("nbprojo")[4] < 20:
+        core.memory("projo").show4()
+        core.memory("nbprojo")[4] += 1
+"""
 
 def resetpos():
     if core.memory("astePos").position.x > 720:
