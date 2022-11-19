@@ -26,7 +26,7 @@ import core
         self.vit.xy = (3*int(100 * cos(radians(self.pos.z))))/80, (3*-int(100 * sin(radians(self.pos.z))))/80
 '''
 class Projectile():
-    def __init__(self, offset=0, scaleSize=(100, 100), display=True, alpha=255):
+    def __init__(self, offset=0, scaleSize=(10,10), display=True, alpha=255):
         self.ready = False
         self.sprit = None
         self.url = 'Assets/projectile.png'
@@ -53,12 +53,11 @@ class Projectile():
             if self.box:
                 core.Draw.rect((0,255,0),(self.pos.x,self.pos.y,self.w,self.h),1)
             if self.ready:
-                #self.sprit.set_alpha(self.alpha)
-                #core.screen.blit(self.sprit, self.pos)
+                self.sprit.set_alpha(self.alpha)
                 core.screen.blit(self.sprit, self.pos.xy)
 
     def apllyvit(self):
-        self.velocity = (3*int(100 * cos(radians(self.pos.z))))/80, (3*-int(100 * sin(radians(self.pos.z))))/80
-        self.pos.xy += self.velocity
+        self.velocity.xy = (3*int(100 * cos(radians(self.pos.z))))/80, (3*-int(100 * sin(radians(self.pos.z))))/80
+        self.pos.xy += self.velocity.xy
 
 

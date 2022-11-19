@@ -118,23 +118,24 @@ from pygame.locals import *
 from core import Texture
 from projectile import Projectile
 
+
 def setup():
     core.fps = 30
-    core.WINDOW_SIZE=[720, 720]
+    core.WINDOW_SIZE = [720, 720]
     core.memory("bobHistorique", [])
     core.memory("incremental", Vector3(0, 0, 0))
     core.memory("p2", Vector2(0, 0))
     core.memory("Vit", Vector2(0, 0))
     core.memory("bool", [False, False, False])
-    #[0] = exe 1 fois projo
+    # [0] = exe 1 fois projo
     core.memory('astePos', Player())
 
+
 def run():
-    if core.memory("bool")[0] == False :
+    if not core.memory("bool")[0]:
         core.memory("projo", Projectile())
         core.memory("projo").load()
         core.memory("bool")[0] = True
-
 
     clock()
     touches()
@@ -142,7 +143,6 @@ def run():
     show()
     shoot()
     resetpos()
-
 
 
 def clock():
@@ -192,16 +192,15 @@ def move():
                 core.memory("astePos").vitesse.y = 0
 
 
-
 def shoot():
 
     if core.getKeyPressList("e"):
-        core.memory("projo").apllyvit()
-        core.memory("projo").ready = True
-        core.memory("projo").show()
-    print(core.memory("projo").ready)
-
-
+        core.memory("Vit").xy = core.memory("astePos").vitesse.xy
+        core.memory("projo").pos.xy = core.memory("p2").xy
+        core.memory("projo").pos.z = core.memory("astePos").position.z
+    core.memory("projo").apllyvit()
+    core.memory("projo").pos.xy += core.memory("projo").velocity.xy + core.memory("Vit")
+    core.memory("projo").show()
 
 def resetpos():
     if core.memory("astePos").position.x > 720:
