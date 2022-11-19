@@ -135,7 +135,9 @@ def setup():
 def run():
     if not core.memory("bool")[0]:
         core.memory("projo", Projectile())
+        core.memory("projo").url = 'Assets/projectile.png'
         core.memory("projo").load()
+
         core.memory("bool")[0] = True
 
     clock()

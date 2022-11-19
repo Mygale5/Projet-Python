@@ -29,7 +29,7 @@ class Projectile():
     def __init__(self, offset=0, scaleSize=(10,10), display=True, alpha=255):
         self.ready = False
         self.sprit = None
-        self.url = 'Assets/projectile.png'
+        self.url = None
         self.w = None
         self.h = None
         self.pos = Vector3(0, 0, 0)
